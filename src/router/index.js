@@ -3,6 +3,8 @@ import Project from '@/views/Project.vue'
 import ProjectEdit from '@/views/ProjectEdit.vue'
 import Task from '@/views/Task.vue'
 import TaskEdit from '@/views/TaskEdit.vue'
+import Change from '@/views/Change.vue'
+import ChangeEdit from '@/views/ChangeEdit.vue'
 
 const routes = [
   {
@@ -24,6 +26,16 @@ const routes = [
     path: '/tasks-edit/:id',
     name: 'TaskEdit',
     component: TaskEdit
+  },
+  {
+    path: '/changes',
+    name: 'Change',
+    component: Change
+  },
+  {
+    path: '/changes-edit/:id',
+    name: 'ChangeEdit',
+    component: ChangeEdit
   },
 ]
 

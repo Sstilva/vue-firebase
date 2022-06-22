@@ -76,3 +76,31 @@ export const useLoadTasks = () => {
   onUnmounted(close)
   return tasks
 }
+
+// Changes.
+const changesCollection = db.collection('changes')
+export const createChange = change => {
+  return changesCollection.add(change)
+}
+
+export const getChange = async id => {
+  const change = await changesCollection.doc(id).get()
+  return change.exists ? change.data() : null
+}
+
+export const updateChange = (id, change) => {
+  return changesCollection.doc(id).update(change)
+}
+
+export const deleteChange = id => {
+  return changesCollection.doc(id).delete()
+}
+
+export const useLoadChanges = () => {
+  const changes = ref([])
+  const close = changesCollection.onSnapshot(snapshot => {
+    changes.value = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+  })
+  onUnmounted(close)
+  return changes
+}
