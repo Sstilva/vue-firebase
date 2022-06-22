@@ -12,7 +12,7 @@
               <a class="nav-link active" href="/projects">Проекты</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" href="#">Задачи</a>
+              <a class="nav-link active" href="/tasks">Задачи</a>
             </li>
             <li class="nav-item">
               <a class="nav-link active" href="#">Проводки</a>

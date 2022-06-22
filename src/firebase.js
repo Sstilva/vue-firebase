@@ -20,8 +20,9 @@ const config = {
 const firebaseApp = firebase.initializeApp(config)
 
 const db = firebaseApp.firestore()
-const projectsCollection = db.collection('projects')
 
+// Projects.
+const projectsCollection = db.collection('projects')
 export const createProject = project => {
   return projectsCollection.add(project)
 }
@@ -46,4 +47,32 @@ export const useLoadProjects = () => {
   })
   onUnmounted(close)
   return projects
+}
+
+// Tasks.
+const tasksCollection = db.collection('tasks')
+export const createTask = task => {
+  return tasksCollection.add(task)
+}
+
+export const getTask = async id => {
+  const task = await tasksCollection.doc(id).get()
+  return task.exists ? task.data() : null
+}
+
+export const updateTask = (id, task) => {
+  return tasksCollection.doc(id).update(task)
+}
+
+export const deleteTask = id => {
+  return tasksCollection.doc(id).delete()
+}
+
+export const useLoadTasks = () => {
+  const tasks = ref([])
+  const close = tasksCollection.onSnapshot(snapshot => {
+    tasks.value = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+  })
+  onUnmounted(close)
+  return tasks
 }
